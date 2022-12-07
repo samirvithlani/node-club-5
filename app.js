@@ -1,29 +1,31 @@
-//const name = require('./calc')
-//const add = require('./calc')
-const calc = require('./calc')
-const http = require('http')
-const file = require('./filehandling/File1')
+//mean --> e express --> middle ware express mongoose
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
 
-console.log(calc.add(4,5))
-console.log(calc.name)
-calc.addUser("royal")
-console.log(calc.employeeName)
+const PORT = 3000;
+const TestRoutes = require('./routes/TestRoutes');
+app.use('/test',TestRoutes) 
 
 
-//file.WriteDataToFile()
-//file.readDataFromFile()
-//file.deleteFile()
-//file.CreateFolder()
-//file.CopyFile()
-//file.writejson()
-file.readJson()
+//db connection
 
-
-
-const server = http.createServer()
-server.listen(3000,()=>{
-    console.log("Server started at port 3000")
+mongoose.connect("mongodb://localhost:27017/club5",{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    
+},(err)=>{
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log("DB connected");
+    }
 })
 
-///require('./calc1')
-//http module --> express MERAN   E express
+
+
+
+app.listen(PORT,()=>{
+    console.log(`Server is running on port ${PORT}`);
+})
