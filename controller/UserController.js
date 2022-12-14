@@ -1,33 +1,88 @@
-const { db } = require('../model/UserSchema');
-const userSchema = require('../model/UserSchema');
+const userSchema = require("../model/UserSchema");
 
-exports.getAllUsers = ((req,res)=>{
+exports.getAllUsers = (req, res) => {
+  userSchema.find((err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in fetching data",
+      });
+    } else {
+      // res.status(201).json({
+      //     message:"Data fetched successfully",
+      //     data:data
+      // })
 
-    userSchema.find((err,data)=>{
+      if (data.length === 0) {
+        res.status(404).json({
+          message: "No data found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Data fetched successfully",
+          data: data,
+        });
+      }
+    }
+  });
+};
 
-        if(err){
-           res.status(500).json({
-                message:"Error in fetching data",
-           })
-        }
-        else{
-            // res.status(201).json({
-            //     message:"Data fetched successfully",
-            //     data:data
-            // })
+exports.createUser = (req, res) => {
+  //object .... req.body....
+  console.log(req.body);
+  const user = new userSchema(req.body);
+  user.save((err, success) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in saving data",
+      });
+    } else {
+      res.status(201).json({
+        message: "Data saved successfully",
+        data: success,
+      });
+    }
+  });
+};
 
-            if(data.length === 0){
-                res.status(404).json({
-                    message:"No data found",
-                })
-            }
-            else{
-                res.status(200).json({
-                    message:"Data fetched successfully",
-                    data:data
-                })
-            }
-        }
+exports.getUserById = (req, res) => {
+  let id = req.params.id;
+  //console.log(req.params);
+  userSchema.findById(id, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in fetching data",
+      });
+    } else {
+
+      if (data != null || data != undefined) {
+        res.status(200).json({
+          message: "Data fetched successfully",
+          data: data,
+        });
+      } else {
+        res.status(404).json({
+          message: "No data found",
+        });
+      }
+    }
+  });
+};
+
+exports.deleteUser =(req,res)=>{
+
+    let id = req.params.id
+    
+    userSchema.findByIdAndDelete(id,(err,data)=>{
+      if(err){
+        res.status(500).json({
+          message:"Error in deleting data"
+        })
+      }
+      else{
+        //data......
+        res.status(204).send()
+      }
     })
 
-})
+
+}
