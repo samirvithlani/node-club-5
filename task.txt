@@ -3,3 +3,6 @@
 name styarts a
 
 gender male ->
+
+//nodemon app.js
+//npm start

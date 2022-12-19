@@ -53,7 +53,6 @@ exports.getUserById = (req, res) => {
         message: "Error in fetching data",
       });
     } else {
-
       if (data != null || data != undefined) {
         res.status(200).json({
           message: "Data fetched successfully",
@@ -68,21 +67,43 @@ exports.getUserById = (req, res) => {
   });
 };
 
-exports.deleteUser =(req,res)=>{
+exports.deleteUser = (req, res) => {
+  let id = req.params.id;
 
-    let id = req.params.id
-    
-    userSchema.findByIdAndDelete(id,(err,data)=>{
-      if(err){
-        res.status(500).json({
-          message:"Error in deleting data"
-        })
-      }
-      else{
-        //data......
-        res.status(204).send()
-      }
-    })
-
-
-}
+  userSchema.findByIdAndDelete(id, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in deleting data",
+      });
+    } else {
+      //data......
+      res.status(204).send();
+    }
+  });
+};
+exports.updateUser = (req, res) => {
+  let id = req.params.id;
+  try {
+    if (req.body._id) {
+      throw new Error("Id is not allowed to update");
+    } 
+    else {
+      userSchema.findByIdAndUpdate(id, req.body, (err, success) => {
+        if (err) {
+          res.status(500).json({
+            message: "Error in updating data",
+          });
+        } else {
+          res.status(200).json({
+            message: "Data updated successfully",
+            data: success,
+          });
+        }
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      message: err.message,
+    });
+  }
+};

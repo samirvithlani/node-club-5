@@ -8,8 +8,12 @@ app.use(express.urlencoded({extended:true}))
 const PORT = 3000;
 const TestRoutes = require('./routes/TestRoutes');
 const userRoutes = require('./routes/UserRoutes');
+const departmentRoutes = require('./routes/DepartmentRoutes');
+const employeeRoutes = require('./routes/EmployeeRoutes');
 app.use('/test',TestRoutes) 
 app.use('/user',userRoutes)
+app.use('/department',departmentRoutes)
+app.use('/employee',employeeRoutes)
 
 //db connection
 
