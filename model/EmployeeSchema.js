@@ -8,10 +8,10 @@ const employeeSchema = new Schema({
         type:String,
         required:true,
     },
-    department:{
+    department:[{
         type : Schema.Types.ObjectId,
         ref:'Department'
-    }
+    }]
     
 })
-module.exports = mongoose.model('Employee',employeeSchema);
+module.exports = mongoose.model('Employee1',employeeSchema);

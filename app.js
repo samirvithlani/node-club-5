@@ -5,15 +5,25 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+
 const PORT = 3000;
 const TestRoutes = require('./routes/TestRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const departmentRoutes = require('./routes/DepartmentRoutes');
 const employeeRoutes = require('./routes/EmployeeRoutes');
+const productRoutes = require('./routes/ProductRoutes');
+const cartRoutes = require('./routes/CartRoutes');
+
 app.use('/test',TestRoutes) 
 app.use('/user',userRoutes)
 app.use('/department',departmentRoutes)
 app.use('/employee',employeeRoutes)
+app.use('/product',productRoutes)
+app.use('/cart',cartRoutes)
+
+
+
+
 
 //db connection
 

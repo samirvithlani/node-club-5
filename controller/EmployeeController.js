@@ -15,3 +15,43 @@ exports.createEmployee = (req, res) => {
         }
     });
 }
+exports.getEmployee = (req,res)=>{
+
+    employeeSchema.find().populate('department').exec((err,data)=>{
+        if(err){
+            res.status(500).json({
+                message:'Error in fetching data'
+            })
+        }
+        else{
+            res.status(200).json({
+                message:'Data fetched successfully',
+                data:data
+            })
+        }
+    })
+
+
+
+
+
+        // employeeSchema.find((err,data)=>{
+
+        //     if(err){
+        //         res.status(500).json({
+        //             message:'Error in fetching data'
+        //         })
+        //     }
+        //     else{
+        //         res.status(200).json({
+        //             message:'Data fetched successfully',
+        //             data:data
+        //         })
+        //     }
+
+        // })
+
+
+
+}
+
