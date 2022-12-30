@@ -28,7 +28,7 @@ exports.getAllUsers = (req, res) => {
 
 exports.createUser = (req, res) => {
   //object .... req.body....
-  console.log(req.body);
+  //console.log(req.body);
   const user = new userSchema(req.body);
   user.save((err, success) => {
     if (err) {
