@@ -3,17 +3,19 @@ const path = require("path");
 
 
 const storage = multer.diskStorage({
-    destination: "./uploads",
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
+    destination:'./uploads',
+    filename: (req, file, ab) => {
+      ab(null, file.originalname);
     },
   });
   
-  const upload = multer({
+  const upload = multer(
+  {
     storage: storage,
     limits: { fileSize: 9000000 },
   
   }).single("file");
+
 exports.uploadFile = (req, res) => {
   upload(req, res, (err) => {
     if (err) {
