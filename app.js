@@ -3,13 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
+require('dotenv').config()
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const TestRoutes = require('./routes/TestRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const departmentRoutes = require('./routes/DepartmentRoutes');
@@ -28,13 +28,9 @@ app.use('/cart',cartRoutes)
 app.use('/upload',uploadRoutes)
 app.use('/role',roleRoutes)
 
-
-
-
-
 //db connection
 
-mongoose.connect("mongodb://127.0.0.1:27017/club5",{
+mongoose.connect("mongodb+srv://samir:sam123@cluster0.key63fx.mongodb.net/club5?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     
