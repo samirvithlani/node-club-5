@@ -1,6 +1,6 @@
 const RoleScnohema = require('../model/RoleSchema');
 
-const auth = () => async(req,res,next)=>{
+const auth  = ()=> async(req,res,next)=>{
 
     //console.log("Auth Middleware",req.headers.auth)
     obj = req.headers.auth

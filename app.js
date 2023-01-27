@@ -19,6 +19,7 @@ const cartRoutes = require('./routes/CartRoutes');
 const uploadRoutes = require('./routes/UploadRoutes');
 const roleRoutes = require('./routes/RoleRoutes');
 
+
 app.use('/test',TestRoutes) 
 app.use('/user',userRoutes)
 app.use('/department',departmentRoutes)
@@ -27,6 +28,7 @@ app.use('/product',productRoutes)
 app.use('/cart',cartRoutes)
 app.use('/upload',uploadRoutes)
 app.use('/role',roleRoutes)
+
 
 //db connection
 
