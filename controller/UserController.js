@@ -1,5 +1,7 @@
 const userSchema = require("../model/UserSchema");
 
+
+
 exports.getAllUsers = (req, res) => {
   userSchema.find((err, data) => {
     if (err) {

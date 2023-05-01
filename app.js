@@ -9,7 +9,7 @@ app.use(cors())
 require('dotenv').config()
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const TestRoutes = require('./routes/TestRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const departmentRoutes = require('./routes/DepartmentRoutes');
@@ -18,6 +18,7 @@ const productRoutes = require('./routes/ProductRoutes');
 const cartRoutes = require('./routes/CartRoutes');
 const uploadRoutes = require('./routes/UploadRoutes');
 const roleRoutes = require('./routes/RoleRoutes');
+const readDataFromFile = require('./routes/StoreDataRoutes');
 
 
 app.use('/test',TestRoutes) 
@@ -28,11 +29,12 @@ app.use('/product',productRoutes)
 app.use('/cart',cartRoutes)
 app.use('/upload',uploadRoutes)
 app.use('/role',roleRoutes)
+app.use('/rf',readDataFromFile)
 
 
 //db connection
 
-mongoose.connect("mongodb+srv://samir:sam123@cluster0.key63fx.mongodb.net/club5?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/club5?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     
