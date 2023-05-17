@@ -19,6 +19,7 @@ const cartRoutes = require('./routes/CartRoutes');
 const uploadRoutes = require('./routes/UploadRoutes');
 const roleRoutes = require('./routes/RoleRoutes');
 const readDataFromFile = require('./routes/StoreDataRoutes');
+const formRoutes = require('./routes/FormRoutes');
 
 
 app.use('/test',TestRoutes) 
@@ -30,7 +31,7 @@ app.use('/cart',cartRoutes)
 app.use('/upload',uploadRoutes)
 app.use('/role',roleRoutes)
 app.use('/rf',readDataFromFile)
-
+app.use('/form',formRoutes)
 
 //db connection
 
