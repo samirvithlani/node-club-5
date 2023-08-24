@@ -20,6 +20,7 @@ const uploadRoutes = require('./routes/UploadRoutes');
 const roleRoutes = require('./routes/RoleRoutes');
 const readDataFromFile = require('./routes/StoreDataRoutes');
 const formRoutes = require('./routes/FormRoutes');
+const locationRoutes = require('./routes/LocationRoutes');
 
 
 app.use('/test',TestRoutes) 
@@ -32,6 +33,7 @@ app.use('/upload',uploadRoutes)
 app.use('/role',roleRoutes)
 app.use('/rf',readDataFromFile)
 app.use('/form',formRoutes)
+app.use('/hiRinku',locationRoutes)
 
 //db connection
 

@@ -1,6 +1,28 @@
 const userSchema = require("../model/UserSchema");
 
-
+exports.loginUser = (req, res) => {
+  userSchema.findOne(
+    { email: req.body.email, password: req.body.password },
+    (err, data) => {
+      if (err) {
+        res.status(500).json({
+          message: "Error in login",
+        });
+      } else {
+        if (data != null) {
+          res.status(200).json({
+            message: "Login successfully",
+            data: data,
+          });
+        } else {
+          res.status(404).json({
+            message: "Invalid credentials",
+          });
+        }
+      }
+    }
+  );
+};
 
 exports.getAllUsers = (req, res) => {
   userSchema.find((err, data) => {
@@ -88,8 +110,7 @@ exports.updateUser = (req, res) => {
   try {
     if (req.body._id) {
       throw new Error("Id is not allowed to update");
-    } 
-    else {
+    } else {
       userSchema.findByIdAndUpdate(id, req.body, (err, success) => {
         if (err) {
           res.status(500).json({
@@ -108,4 +129,11 @@ exports.updateUser = (req, res) => {
       message: err.message,
     });
   }
+};
+
+exports.test = (req, res) => {
+  res.status(200).json({
+    message: "Test API",
+    flag: 1,
+  });
 };

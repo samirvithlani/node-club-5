@@ -19,3 +19,18 @@ exports.createProduct = (req, res) => {
     })
 
 }
+exports.getAllProducts = (req, res) => {
+    productSchema.find({},(err,data)=>{
+        if(err){
+            res.status(500).json({
+                message:'Error in fetching data'
+            })
+        }
+        else{
+            res.status(200).json({
+                message:'Data fetched successfully',
+                data:data
+            })
+        }
+    })
+}
