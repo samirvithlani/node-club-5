@@ -27,4 +27,21 @@ const getUserLocation = async (req, res) => {
       }
 
 }
-module.exports = {getUserLocation}
+const postLocation = async (req, res) => {
+    try {
+        const {name,lat,long} = req.body;
+        console.log(name,lat,long);
+        const location = new locationSchema({
+            name:name,
+            lat:lat,
+            long:long
+        })
+        const result = await location.save();
+        console.log(result);
+        res.json(result);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+}
+module.exports = {getUserLocation,postLocation}
