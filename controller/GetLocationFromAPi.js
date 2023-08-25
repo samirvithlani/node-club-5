@@ -36,6 +36,7 @@ const postLocation = async (req, res) => {
             lat:lat,
             long:long
         })
+        console.log(location);
         const result = await location.save();
         console.log(result);
         res.json(result);
