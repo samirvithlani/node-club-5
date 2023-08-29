@@ -1,5 +1,57 @@
 const userSchema = require("../model/UserSchema");
 
+exports.filterUser = (req, res) => {
+
+  //filter user data using query params
+  
+
+  //console.log(name,email,age);
+  //find data using ...query
+  console.log(req.query);
+  userSchema.find({...req.query}, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in fetching data",
+      });
+    } else {
+      if (data.length === 0) {
+        res.status(404).json({
+          message: "No data found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Data fetched successfully",
+          data: data,
+        });
+      }
+    }
+  });
+
+  
+}
+exports.searchUserByName = (req, res) => {
+
+  const name = req.params.name;
+  userSchema.find({ name: { $regex: name, $options: "i" } }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Error in fetching data",
+      });
+    } else {
+      if (data.length === 0) {
+        res.status(404).json({
+          message: "No data found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Data fetched successfully",
+          data: data,
+        });
+      }
+    }
+  });
+
+}
 exports.loginUser = (req, res) => {
   userSchema.findOne(
     { email: req.body.email, password: req.body.password },

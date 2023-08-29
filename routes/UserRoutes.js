@@ -13,6 +13,8 @@ router.delete('/user/:id',userController.deleteUser)
 router.put('/user/:id',userController.updateUser)
 router.get('/test',userController.test)
 router.post('/login',userController.loginUser)
+router.get('/search/:name',userController.searchUserByName)
+router.get('/filter',userController.filterUser)
 
 
 module.exports = router;
