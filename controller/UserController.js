@@ -15,8 +15,9 @@ exports.filterUser = (req, res) => {
       });
     } else {
       if (data.length === 0) {
-        res.status(404).json({
+        res.status(200).json({
           message: "No data found",
+          data:[]
         });
       } else {
         res.status(200).json({
