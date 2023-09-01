@@ -27,9 +27,36 @@ exports.filterUser = (req, res) => {
       }
     }
   });
-
-  
 }
+
+
+exports.filterUserData = async(req, res) => {
+
+  console.log(req.query);
+  try{
+  var users = await userSchema.find({...req.query})
+  if(users){
+    res.status(200).json({
+      message: "Data fetched successfully",
+      data: users,
+    });
+  }
+  else{
+    res.status(200).json({
+      message: "No data found",
+      data:[],
+    });
+  }
+  }catch(err){
+    res.status(500).json({
+      message: "Error in fetching data",
+    });
+  }
+  
+
+}
+
+
 exports.searchUserByName = (req, res) => {
 
   const name = req.params.name;

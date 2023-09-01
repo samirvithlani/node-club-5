@@ -15,6 +15,7 @@ router.get('/test',userController.test)
 router.post('/login',userController.loginUser)
 router.get('/search/:name',userController.searchUserByName)
 router.get('/filter',userController.filterUser)
+router.get('/filter2',userController.filterUserData)
 
 
 module.exports = router;
