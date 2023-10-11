@@ -2,6 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
+
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -25,7 +27,7 @@ const locationRoutes = require('./routes/LocationRoutes');
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.post('/load-static-page', (req, res) => {
+app.post('/loadstatic', (req, res) => {
     // Here you can specify the logic to determine the file to be served
     const staticFilePath = path.join(__dirname, 'public', 'static.html');
     
