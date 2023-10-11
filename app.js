@@ -7,7 +7,9 @@ const path = require('path');
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(cors())
+app.use(cors({
+    origin:'http://localhost:3000'
+}))
 require('dotenv').config()
 
 
@@ -30,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.post('/loadstatic', (req, res) => {
     // Here you can specify the logic to determine the file to be served
     const staticFilePath = path.join(__dirname, 'public', 'static.html');
+    console.log("request...",req.body);
     
     res.sendFile(staticFilePath, (err) => {
       if (err) {
