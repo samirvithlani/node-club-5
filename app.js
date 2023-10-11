@@ -23,6 +23,20 @@ const formRoutes = require('./routes/FormRoutes');
 const locationRoutes = require('./routes/LocationRoutes');
 
 
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.post('/load-static-page', (req, res) => {
+    // Here you can specify the logic to determine the file to be served
+    const staticFilePath = path.join(__dirname, 'public', 'static.html');
+    
+    res.sendFile(staticFilePath, (err) => {
+      if (err) {
+        res.status(500).send('Error loading the static page');
+      }
+    });
+  });
+
+
 app.use('/test',TestRoutes) 
 app.use('/user',userRoutes)
 app.use('/department',departmentRoutes)
