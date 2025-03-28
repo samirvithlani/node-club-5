@@ -12,6 +12,23 @@ const productSchema = new Schema({
     description: {
         type: String,
     },
+    colors:[
+        {
+            type:String
+        }
+    ],
+    size:{
+        type:String,
+        enum:["s","m","l","xl","xxl","xxxl"]
+    },
+    isAvailable:{
+        type:Boolean,
+        default:true,
+    },
+    unit:{
+        type:Number,
+        default:0
+    }
     },
     { timestamps: true }
 )
