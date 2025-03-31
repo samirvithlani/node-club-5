@@ -34,3 +34,18 @@ exports.getAllProducts = (req, res) => {
         }
     })
 }
+
+exports.createManyProduct = async (req, res) => {
+    try {
+        const products = await productSchema.insertMany(req.body);
+        res.status(201).json({
+            message: 'Products saved successfully',
+            data: products
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: 'Error in saving multiple products',
+            error: err.message
+        });
+    }
+}
