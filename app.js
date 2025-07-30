@@ -24,7 +24,7 @@ const limiter = rateLimit({
 });
 
 // Apply to all requests
-app.use(limiter);
+//app.use(limiter);
 
 const PORT = process.env.PORT || 3001;
 const TestRoutes = require('./routes/TestRoutes');
