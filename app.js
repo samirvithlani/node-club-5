@@ -34,11 +34,11 @@ const employeeRoutes = require('./routes/EmployeeRoutes');
 const productRoutes = require('./routes/ProductRoutes');
 const cartRoutes = require('./routes/CartRoutes');
 const uploadRoutes = require('./routes/UploadRoutes');
-const roleRoutes = require('./routes/RoleRoutes');
-const readDataFromFile = require('./routes/StoreDataRoutes');
-const formRoutes = require('./routes/FormRoutes');
-const locationRoutes = require('./routes/LocationRoutes');
-const questionRoutes = require('./routes/QuestionRoutes');
+//const roleRoutes = require('./routes/RoleRoutes');
+//const readDataFromFile = require('./routes/StoreDataRoutes');
+//const formRoutes = require('./routes/FormRoutes');
+//const locationRoutes = require('./routes/LocationRoutes');
+//const questionRoutes = require('./routes/QuestionRoutes');
 
 
 app.use(express.static(path.join(__dirname, 'public')))
