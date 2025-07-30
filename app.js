@@ -3,8 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
+
 
 const app = express();
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
@@ -12,6 +15,16 @@ app.use(cors({
   }));
 require('dotenv').config()
 
+const limiter = rateLimit({
+  windowMs: 10*1000, // 15 minutes
+  max: 1, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again after 15 minutes.',
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+// Apply to all requests
+app.use(limiter);
 
 const PORT = process.env.PORT || 3001;
 const TestRoutes = require('./routes/TestRoutes');
@@ -25,6 +38,7 @@ const roleRoutes = require('./routes/RoleRoutes');
 const readDataFromFile = require('./routes/StoreDataRoutes');
 const formRoutes = require('./routes/FormRoutes');
 const locationRoutes = require('./routes/LocationRoutes');
+const questionRoutes = require('./routes/QuestionRoutes');
 
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -34,7 +48,12 @@ app.post('/loadstatic', (req, res) => {
     const staticFilePath = path.join(__dirname, 'public', 'static.html');
     console.log("request...",req.body);
     
-    res.send("<h1>'payment suces...'</h1>")
+    //res.send("<h1>'payment suces...'</h1>")
+    res.sendFile(staticFilePath, (err) => {
+        if (err) {
+          res.status(500).send('Error loading the static page');
+        }
+      });
   });
 
 
@@ -49,6 +68,7 @@ app.use('/role',roleRoutes)
 app.use('/rf',readDataFromFile)
 app.use('/form',formRoutes)
 app.use('/hiRinku',locationRoutes)
+app.use('/question',questionRoutes)
 
 //db connection
 
