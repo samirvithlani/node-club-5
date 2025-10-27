@@ -34,6 +34,7 @@ const employeeRoutes = require('./routes/EmployeeRoutes');
 const productRoutes = require('./routes/ProductRoutes');
 const cartRoutes = require('./routes/CartRoutes');
 const uploadRoutes = require('./routes/UploadRoutes');
+const itemRoutes = require("./routes/ItemRoutes")
 //const roleRoutes = require('./routes/RoleRoutes');
 //const readDataFromFile = require('./routes/StoreDataRoutes');
 //const formRoutes = require('./routes/FormRoutes');
@@ -62,6 +63,7 @@ app.use('/user',userRoutes)
 app.use('/department',departmentRoutes)
 app.use('/employee',employeeRoutes)
 app.use('/product',productRoutes)
+app.use("/item",itemRoutes)
 //app.use('/cart',cartRoutes)
 //app.use('/upload',uploadRoutes)
 //app.use('/role',roleRoutes)
