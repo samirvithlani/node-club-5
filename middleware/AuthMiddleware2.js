@@ -6,7 +6,7 @@ const AuthMiddlware1 = async(req,res,next)=>{
 
 
     var token = req.body.Authorization
-    if(token){
+    if(token!=undefined || token!= null || token!=""){
 
         if(token.startsWith("Bearer ")){
             token = token.split(" ")[1]
