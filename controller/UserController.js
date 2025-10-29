@@ -97,9 +97,10 @@ exports.loginUser = async (req, res) => {
     }
 
     // Step 3: Login success
+    const token = jwt.sign({id:user._id},secret)
     return res.status(200).json({
       message: "Login successfully",
-      data: user,
+      data: token,
     });
   } catch (err) {
     console.error(err);
@@ -155,7 +156,7 @@ exports.createUser =async (req, res) => {
     const token = jwt.sign({id:user._id},secret)
     res.status(200).json({
       message:"user login success",
-      token:token
+      token:user
     })
     // user.save((err, success) => {
     //   if (err) {
