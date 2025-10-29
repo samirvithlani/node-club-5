@@ -1,4 +1,4 @@
-const RoleScnohema = require('../model/RoleSchema');
+const RoleSchema = require('../model/RoleSchema');
 
 const auth  = ()=> async(req,res,next)=>{
 
