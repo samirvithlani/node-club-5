@@ -1,5 +1,7 @@
 const userSchema = require("../model/UserSchema");
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const secret = "samir"
 
 exports.filterUser = (req, res) => {
   //filter user data using query params
@@ -135,7 +137,7 @@ exports.getAllUsers = (req, res) => {
   });
 };
 
-exports.createUser = (req, res) => {
+exports.createUser =async (req, res) => {
   //object .... req.body....
   //console.log(req.body);
   
@@ -149,19 +151,24 @@ exports.createUser = (req, res) => {
     
     const hashedPassword = bcrypt.hashSync(req.body.password,10)
     
-    const user = new userSchema({...req.body,password:hashedPassword});
-    user.save((err, success) => {
-      if (err) {
-        res.status(500).json({
-          message: "Error in saving data",
-        });
-      } else {
-        res.status(201).json({
-          message: "Data saved successfully",
-          data: success,
-        });
-      }
-    });
+    const user = await userSchema.create({...req.body,password:hashedPassword});
+    const token = jwt.sign({id:user._id},secret)
+    res.status(200).json({
+      message:"user login success",
+      token:token
+    })
+    // user.save((err, success) => {
+    //   if (err) {
+    //     res.status(500).json({
+    //       message: "Error in saving data",
+    //     });
+    //   } else {
+    //     res.status(201).json({
+    //       message: "Data saved successfully",
+    //       data: success,
+    //     });
+    //   }
+    // });
   } catch (err) {
     res.status(500).json({
       message: "error while adding data",
