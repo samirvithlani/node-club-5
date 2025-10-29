@@ -5,14 +5,15 @@ const jwt = require("jsonwebtoken")
 const AuthMiddlware1 = async(req,res,next)=>{
 
 
-    var token = req.body.Authorization
+    var token = req.headers.authorization
+    console.log(token)
     if(token!=undefined || token!= null || token!=""){
 
         if(token.startsWith("Bearer ")){
             token = token.split(" ")[1]
             try{
 
-                const objfromtoken = jwt.verify(token)
+                const objfromtoken = jwt.verify(token,secret)
                 const foundUser = await userSchema.findById(objfromtoken.id)
                 if(foundUser){
                     next()
